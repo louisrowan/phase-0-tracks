@@ -18,4 +18,4 @@ A commit is taking a 'snapshot' of the repository. This means that in the future
 
 A merge conflict occurs when git is unable to merge two branches together. The most likely cause of this would be if two people were working on the same file and made conflicting changes. Git is not able to merge the branches but it does mark where the conflict is in the file, which can then be edited to confirm which version is to be used. Another form of merge conflict occurs if a merging branch has deleted one of the files from the repo. To solve, the file can be added and committed to the new version of the repo, and then either kept in the repo or can then be deleted.
 
-**
+********************

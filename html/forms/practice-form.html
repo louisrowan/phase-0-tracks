@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form</title>
+</head>
+<body>
+
+<form name="Email_form" action="success.html">
+	<div>
+	<label>Select your Country</label>
+	<select name="country">		
+		<option value="select country">USA</option>
+		<option value="select country">England</option>
+		<option value="select country">Mexico</option>
+		<option value="select country">Other</option>
+	</select>
+	</div>
+<br>
+	<div>
+	<label>Name:</label>
+	<input type="text" name="name">
+	</div>
+
+	<br>
+
+	<fieldset>
+		<legend>Title</legend>
+		<p>
+			<label>
+				<input type="checkbox" name="variable">X
+			</label>
+		</p>
+		<p>
+			<label>
+				<input type="checkbox" name="variable">Y
+			</label>
+		</p>
+		<p>
+			<label>
+				<input type="checkbox" name="variable">Z
+			</label>
+		</p>
+	</fieldset>
+	<br>
+	<fieldset>
+		<legend>What is your Age?</legend>
+			<label>
+				<input type="radio" name="age">Under 18
+			</label>
+
+			<label>
+				<input type="radio" name="age">18-65
+			</label>
+
+			<label>
+				<input type="radio" name="age">Over 65
+			</label>
+	</fieldset>
+
+<br>
+
+	<div>
+	<label>Enter comments</label>
+	<textarea cols="50" rows="5"></textarea>
+	</div>
+
+	<button type="submit">Submit</button>
+
+</form>
+
+
+
+</body>
+</html>

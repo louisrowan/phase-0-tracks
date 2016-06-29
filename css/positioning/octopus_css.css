@@ -1,0 +1,28 @@
+div {
+	width:1000px;
+	height:343px;
+	background-color:lightgrey;
+	border:1px solid black;
+}
+
+#hat {
+	position:absolute;
+	left: 360px;
+	z-index:2;
+
+}
+
+#glasses {
+	position:absolute;
+	left:425px;
+	top:165px;
+	z-index:3;
+}
+
+#octopus {
+	position:absolute;
+	margin-left: 375px;
+	margin-right: 500px;
+	top:65px;
+	z-index:1;
+}

@@ -1,0 +1,28 @@
+Using an Elevator:
+
+- Walk up to Elevators and determine the floor you are currently on.
+- If your desired floor is less than your current floor, press the down button.
+- If your desired floor is greater than your current floor, press the up botton.
+- If you pressed the up button, walk into the next open Elevator ONLY if the 'up' button is lit up.
+- If you pressed the down, button, walk into the next open Elevator ONLY if the 'down' button is lit up.
+- Once in the Elevator, press the button corresponding to your desired floor.
+- Wait in the Elevator until it stops at your floor and the doors open, then get off.
+
+
+Real-Life Algorithm: My Morning Routine
+
+- If I can get out of bed 30 minutes or more before I need to leave, do the following steps:
+1. Take a shower, brush my teeth.
+2. Get dressed
+3. Go downstairs, eat a bowl of cereal, or 2 if I am still hungry, and drink a glass of milk.
+4. Play on my phone for 10 minutes.
+5. Get into car and leave 10 minutes early.
+- If I get out of bed 15-29 minutes before I need to leave: 
+1. Take a shower, brush my teeth.
+2. Get dressed
+3. Quickly eat a yogurt and drink a glass of milk.
+4. Get into my car and leave.
+- If I get out of bed less than 15 minutes before I need to leave:
+1. Take a very quick shower and brush my teeth in the shower.
+2. Get dressed and get into my car to leave.
+3. Complain to everyone I see all morning that I'm starving because I didn't have time to eat breakfast.

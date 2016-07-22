@@ -54,8 +54,20 @@ def alias_method (name)
 	new_last = new_last.join('').capitalize
 	new_first = new_first.join('').capitalize
 	return_val = new_last + new_first
-	puts return_val
 	return_val
 end
 
-alias_method ("azaz zuza")
+loop do
+	puts "Enter a name to be converted into a new alias or 'quit' to exit"
+	user_response = gets.chomp
+	if user_response == 'quit' || user_response == ''
+		break
+	end
+	if user_response.split(' ').length != 2
+		puts "Please enter a valid reponse with both a first and last name"
+		puts
+		next
+	end
+	puts "Alias: #{alias_method(user_response)}"
+	puts
+end

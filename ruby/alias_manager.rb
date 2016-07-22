@@ -57,6 +57,9 @@ def alias_method (name)
 	return_val
 end
 
+old_names = []
+new_names = []
+
 loop do
 	puts "Enter a name to be converted into a new alias or 'quit' to exit"
 	user_response = gets.chomp
@@ -68,6 +71,14 @@ loop do
 		puts
 		next
 	end
+	old_names.push(user_response)
+	new_names.push(alias_method(user_response))
 	puts "Alias: #{alias_method(user_response)}"
 	puts
+end
+
+index = 0
+old_names.each do |x|
+	puts "#{x} is now called #{new_names[index]}"
+	index += 1
 end

@@ -1,34 +1,17 @@
-groceries = ["milk", "oranges", "cookies", "ice cream"]
+# Method that takes a block
 
-groceries_hash = {
-  "milk" => 2,
-  "oranges" => 20,
-  "cookies" => 30,
-  "ice cream" => 1
-  }
-
-groceries.each do |item|
-  puts item
+def new_method
+  x = 5
+  y = 10
+  puts "Hello"
+  yield(x, y)
+  puts "Goodbye"
 end
 
-groceries.map! do |item|
-  puts item.upcase
-end
-
-groceries_hash.each do |item, amount|
-  puts "#{item} #{amount}"
-end
-
-groceries_hash.map do |item, amount|
-  amount += 10
-  puts "#{item} #{amount}"
-end
+new_method {|x, y| puts "#{x} + #{y} = #{x+y}"}
 
 
--
-
-
-
+# Declare an Array and a Hash with some data
 
 groceries = ["milk", "oranges", "cookies", "ice cream"]
 
@@ -39,113 +22,94 @@ groceries_hash = {
   "ice cream" => 1
   }
 
+# Iterate through the items using .each and .map!
+
+# p groceries -> ["milk", "oranges", "cookies", "ice cream"]
 
 groceries.each do |item|
-  puts item
+  item.capitalize
 end
+# p groceries -> ["milk", "oranges", "cookies", "ice cream"] (not modified)
 
 groceries.map! do |item|
-  puts item.upcase
+  item.upcase
 end
+# p groceries -> ["MILK", "ORANGES", "COOKIES", "ICE CREAM"] (modified)
 
+# p groceries_hash -> {"milk"=>2, "oranges"=>20, "cookies"=>30, "ice cream"=>1}
 groceries_hash.each do |item, amount|
-  puts "#{item} #{amount}"
+  amount += 10
+  "#{item} #{amount}"
 end
+# p groceries_hash -> {"milk"=>2, "oranges"=>20, "cookies"=>30, "ice cream"=>1} (not modified)
 
 groceries_hash.map do |item, amount|
   amount += 10
   puts "#{item} #{amount}"
 end
+# p groceries_hash -> {"milk"=>2, "oranges"=>20, "cookies"=>30, "ice cream"=>1} (not modified)
+
+
+# Create array of integers:
 
 numbers = [2, 27, 4, 11, 19]
 
+# Method 1: Iterations through array deleting any less than 5
 def reject_num(numbers)
-new_numbers = numbers.reject { |x| x < 5 }
-p new_numbers
+return numbers.reject { |x| x < 5 }
 end
+# p reject_num(numbers) -> [27, 11, 19]
 
+# Method 2: Filters data structure for only items that are less than 5
 def select(numbers)
-more_numbers = numbers.select { |x| x < 5 }
-p more_numbers
+return numbers.select { |x| x < 5 }
 end
+# p select(numbers) -> [2, 4]
 
+# Method 3: Filters numbers satisfying a certain condition
 def keep(numbers)
-even_more_numbers = numbers.drop_while { |x| x <= 4 }
-p even_more_numbers
+return numbers.drop_while { |x| x <= 4 }
 end
+# p keep(numbers) -> [27, 4, 11, 19]
 
-
+# Method 4: Removes items until condition in block is false
 def do_till_false(numbers)  
-numbers.each do |x|
-  while numbers.length > 3
-    numbers.pop
+  numbers.each do |x|
+    while numbers.length > 3
+     numbers.pop
+    end
   end
-end
 p numbers
 end
+# p do_till_false(numbers) -> [2, 27, 4]
 
-reject_num(numbers)
-select(numbers)
-keep(numbers)
-do_till_false(numbers) 
-p numbers
+# Hashes:
 
-def hash_select(groceries_hash)
-new_hash = groceries_hash.select { |items,values| items != "milk"}
-p new_hash
-end
-
+# Method 1: Iterates through items deleting any that do not meet certain condition
 def hash_delete(groceries_hash)
-another_hash = groceries_hash.delete_if {|items, values| items.length <= 7}
-p another_hash
+return groceries_hash.delete_if {|items, values| items.length <= 7}
 end
+# p hash_delete(groceries_hash) -> {"ice cream"=>1}
 
+# Method 2: Filters data for only items that satify a certain condition
+def hash_select(groceries_hash)
+return groceries_hash.select { |items,values| items != "milk"}
+end
+# p hash_select(groceries_hash) -> {"oranges"=>20, "cookies"=>30, "ice cream"=>1}
 
-hash_select(groceries_hash)
-hash_delete(groceries_hash)
-
-groceries_hash = {
-  "milk" => 2,
-  "oranges" => 20,
-  "cookies" => 30,
-  "ice cream" => 1
-  }
-
-
+# Method 3: Also filters data keeping only items that satisfy the condition
 def hash_keep(groceries_hash)
-new_hash = groceries_hash.keep_if {|items, values| items == "milk"}
-p new_hash
+return groceries_hash.keep_if {|items, values| items == "milk"}
 end
-  
-hash_keep(groceries_hash)
+# p hash_keep(groceries_hash) -> {"milk"=>2}
 
-groceries_hash = {
-  "milk" => 2,
-  "oranges" => 20,
-  "cookies" => 30,
-  "ice cream" => 1
-  }
-
-# def hash_remove(groceries_hash)
-# # groceries_hash.each do |x,y|
-  
-#   i =  groceries_hash.length
-#   groceries_hash.each do |x,y|
-#   while i > 2
-#     i = i - 1
-#   end
-#     puts "#{x} #{y}"
-#   end
-
-
-  
+# Method 4: Removes items until condition in block is false 
 def hash_remove(groceries_hash)
 groceries_hash.each do |x,y|
   while groceries_hash.length > 2
-    puts "#{x} #{y}"
     groceries_hash.delete(x)
   end
 end
+return groceries_hash
 end
-
-hash_remove(groceries_hash)
+# Can't figure this one out

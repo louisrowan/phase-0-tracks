@@ -1,4 +1,6 @@
 class Santa
+	attr_accessor :gender
+	attr_reader :ethnicity, :age, :reindeer_ranking
 	def initialize (gender, ethnicity)
 		puts "Initializing Santa instance..."
 		@gender = gender
@@ -7,6 +9,7 @@ class Santa
 			"Comet", "Cupid", "Donner", "Blitzen"]
 		@age = 0
 	end
+	
 	def speak
 		puts "Ho, ho, ho! Haaaappy holidays!"
 	end
@@ -21,22 +24,6 @@ class Santa
 
 	def get_mad_at (reindeer_name)
 		@reindeer_ranking.insert(-1, @reindeer_ranking.delete_at(@reindeer_ranking.index(reindeer_name)))
-	end
-
-	def ranking
-		puts @reindeer_ranking
-	end
-
-	def gender= (gender)
-		@gender = gender
-	end
-
-	def age
-		@age
-	end
-
-	def ethnicity
-		@ethniicity
 	end
 end
 
@@ -60,9 +47,6 @@ end
 
 
 my_santa = Santa.new "White", "Asian"
-my_santa.ranking
 puts
 my_santa.get_mad_at ("Donner")
-my_santa.ranking
 my_santa.gender = "Indian"
-my_santa.age

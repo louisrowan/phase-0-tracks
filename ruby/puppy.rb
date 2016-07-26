@@ -1,5 +1,6 @@
 # Puppy class
 # Species name: Puppy
+
 # Characteristics ----------
 # Legs: 4
 # Eyes: 2
@@ -7,6 +8,7 @@
 # Skin color: varies
 # Name: varies
 # Attitude: varies
+
 # Behavior --------
 # Run
 # Bark

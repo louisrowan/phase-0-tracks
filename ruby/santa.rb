@@ -14,6 +14,30 @@ class Santa
 	def eat_milk_and_cookies (cookie)
 		puts "That was a good #{cookie}!"
 	end
+
+	def celebrate_birthday
+		@age += 1
+	end
+
+	def get_mad_at (reindeer_name)
+		@reindeer_ranking.insert(-1, @reindeer_ranking.delete_at(@reindeer_ranking.index(reindeer_name)))
+	end
+
+	def ranking
+		puts @reindeer_ranking
+	end
+
+	def gender= (gender)
+		@gender = gender
+	end
+
+	def age
+		@age
+	end
+
+	def ethnicity
+		@ethniicity
+	end
 end
 
 =begin
@@ -24,19 +48,21 @@ test.eat_milk_and_cookies "black and white cookie"
 
 
 # Initialize santas
-=begin
 santas = []
-puts "Enter gender, ethnicity like this:"
-puts "Female, Japanese"
-puts "Press return when finished"
-puts
-
-response = nil
-until response == ''
-	response = gets.chomp
-	response_split = response.split(',')
-	santas << Santa.new(response_split[0], response_split[1])
+genders = "male female gender-fluid bigender male agender female"
+ethnicities = "white black japanese universal latino spanish egyptian"
+genders = genders.split(' ')
+ethnicities = ethnicities.split(' ')
+genders.length.times do |x|
+	santas << Santa.new(genders[x], ethnicities[x])
 end
 
-puts santas
-=end
+
+
+my_santa = Santa.new "White", "Asian"
+my_santa.ranking
+puts
+my_santa.get_mad_at ("Donner")
+my_santa.ranking
+my_santa.gender = "Indian"
+my_santa.age

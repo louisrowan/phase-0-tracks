@@ -17,7 +17,7 @@ class Game
 	def initialize(answer)
 		@already_guessed = []
 		@answer = answer
-		@guesses_left = answer.length
+		@guesses_left = answer.length + 2
 		@hint = answer.split('')
 	end
 
@@ -28,6 +28,7 @@ class Game
 		end
 		update_already_guessed(@guess)
 		if update_hint == 'you win' || @guess == @answer
+			puts "-"*50
 			puts "You win! You correctly guessed the word: #{@answer}"
 			return 'you win'
 		end
@@ -48,28 +49,30 @@ class Game
 	end
 
 	def update_hint
-		@updated_hint = []
+		updated_hint = []
 		@hint.each do |character|
-			if @already_guessed.include?(character)
-				@updated_hint.push(character)
+			if @already_guessed.include?(character) || character == ' '
+				updated_hint.push(character)
 			else
-				@updated_hint.push(" _ ")
+				updated_hint.push(" _ ")
 			end
 		end
-		if @updated_hint.join('') == @answer
+		if updated_hint.join('') == @answer
 			return 'you win'
 		end
-		return @updated_hint.join('')
+		return updated_hint.join('')
 	end
 end
-
 
 
 # User Interface
 puts 'Enter a word to be guessed'
 word_to_be_guessed = gets.chomp
 puts
+puts "You have #{word_to_be_guessed.length + 2} attempts to guess the word or phrase:"
 x = Game.new(word_to_be_guessed)
+puts x.update_hint
+puts
 loop do
 	puts 'Guess a single letter or the entire word/phrase'
 	response = gets.chomp

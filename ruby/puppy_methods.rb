@@ -41,3 +41,37 @@ p my_puppy.name("Jonathan") #-> "This puppy is named Jonathan"
 # is never run.
 
 # Release 2:
+
+class Car
+	def initialize
+		puts "New car created!"
+	end
+
+	def fill_tank
+		return "*Gas tank is now full*"
+	end
+
+	def drive(miles, destination)
+		return "Driving #{miles} miles to #{destination}."
+	end
+
+	def color(color)
+		return "This car is #{color}."
+	end
+end
+
+cars = []
+50.times do |instance|
+	instance = Car.new
+	cars.push(instance)
+end
+
+counter = 1
+cars.each do |instance|
+	p "Car ##{counter}:"
+	p instance.fill_tank
+	p instance.drive(20, "car wash")
+	p instance.color("red")
+	puts
+	counter += 1
+end

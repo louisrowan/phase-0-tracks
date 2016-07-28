@@ -11,3 +11,23 @@ Hint method:
 -- outputs a hint showing only the previously guessed characters
 
 =end
+
+class Game
+
+	def setup(answer)
+		@answer = answer
+		@guesses_left = answer.length
+		@hint = answer.split('')
+		@already_guessed = []
+	end
+
+	def guess(guess)
+		@guess = guess
+		return @guess
+	end
+
+end
+
+x = Game.new
+word = "bananas"
+x.setup(word)

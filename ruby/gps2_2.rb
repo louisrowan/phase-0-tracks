@@ -88,7 +88,7 @@ What kind of things can you pass into methods as arguments?
 
 How can you pass information between methods?
   Methods can be nested inside each other, like I did with the add_item and
-  update_quantity methods,
+  update_quantity methods.
 
 What concepts were solidified in this challenge, and what concepts are still confusing?
   I definitely feel more comfortable with splitting up a big problem into

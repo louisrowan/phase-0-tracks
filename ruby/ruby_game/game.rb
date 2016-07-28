@@ -14,20 +14,38 @@ Hint method:
 
 class Game
 
-	def setup(answer)
+	def initialize(answer)
+		@already_guessed = []
 		@answer = answer
 		@guesses_left = answer.length
 		@hint = answer.split('')
-		@already_guessed = []
 	end
 
 	def guess(guess)
 		@guess = guess
+		update_already_guessed(@guess)
+		puts update_hint
 		return @guess
 	end
 
+	def update_already_guessed(guess)
+		@already_guessed.push(guess)
+		return @already_guessed
+	end
+
+	def update_hint
+		@updated_hint = []
+		@hint.each do |character|
+			if @already_guessed.include?(character)
+				@updated_hint.push(character)
+			else
+				@updated_hint.push(" _ ")
+			end
+		end
+		return @updated_hint.join('')
+	end
 end
 
-x = Game.new
-word = "bananas"
-x.setup(word)
+x = Game.new("bananas")
+x.guess("c")
+x.guess("a")

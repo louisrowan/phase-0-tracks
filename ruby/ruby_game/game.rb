@@ -1,14 +1,25 @@
 =begin
 	
-Input: word or phrase to be guessed
+Initialize:
+-- input is the word to be guessed
+-- declare instance variables like an empty array of already guessed letters
+-- determine how many guesses the player will have
 
 Guess method:
 -- input is a character to be guessed
--- guess method checks to see if that character is in the word to be guessed
+-- checks to see if that letter has already been guessed
+-- if not, calls already_guessed method to add it to list of guessed letters
+-- calls hint method
+-- subtracts 1 from guesses left variable each time a new guess is called
+-- returns 'you win', 'already guessed' or 'you ran out of guesses', when appropriate
 
 Hint method:
--- input is the last character guessed
+-- iterates through answer and determines which letters have been guessed
 -- outputs a hint showing only the previously guessed characters
+-- un-guessed characters are shown as " _ "
+
+update_already_guessed method:
+-- contains an array of all past and current guesses
 
 =end
 
@@ -67,7 +78,10 @@ end
 
 # User Interface
 puts 'Enter a word to be guessed'
-word_to_be_guessed = gets.chomp
+word_to_be_guessed = gets.chomp.downcase
+50.times do
+	puts "*"*50 #-> this code is just to clear the screen of the word to be guessed
+end
 puts
 puts "You have #{word_to_be_guessed.length + 2} attempts to guess the word or phrase:"
 x = Game.new(word_to_be_guessed)

@@ -36,4 +36,5 @@ var anotherCar = new Car("Mazda", 1990, true);
 console.log(anotherCar);
 anotherCar.starts();
 
-// 
+// If you wanted to loop through the keys and values of an object, how would you do that? (There are a few ways to accomplish this, and some gotchas that can happen depending on your approach.)
+// Are there advantages to using constructor functions to create objects? Disadvantages? 

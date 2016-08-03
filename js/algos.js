@@ -28,22 +28,27 @@ second_object = {
 }
 
 
+// Release 1: Create function that checks if 2 objects have a matching key/value pair
 
-for (var key in my_object) {
-	console.log(key + " = " + my_object[key])
-}
-
-console.log('')
-
-for (var key in second_object) {
-	console.log(key + " = " + second_object[key])
-}
-
-console.log('')
-
-for (var key in my_object) {
-	for (var second_key in second_object) {
-		if ( key, my_object[key] == second_key, second_object[key] ){ true }
-		else {false}
+function matchingPair(object1, object2) {
+	for (var key in object1)
+		for (var second_key in object2) {
+			if (key + object1[key] == second_key + object2[second_key]) {return_val = true}
+			else {return_val = false}
 	}
+	return return_val;
 }
+
+console.log(matchingPair(my_object, second_object)); // -> true
+
+third_object = {
+	location: 'USA',
+	year: 1900
+}
+
+fourth_object = {
+	location: 'China',
+	year: 2000
+}
+
+console.log(matchingPair(third_object, fourth_object)); // -> false

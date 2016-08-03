@@ -56,17 +56,20 @@ console.log(matchingPair(third_object, fourth_object)); // -> false
 
 // Release 2:
 
-Math.round(((Math.random(10))*10)+1)
-
-
 function buildArray(integer) {
 	array = []
-	
+	letters = 'abcdefghijklmnopqrstuvwxyz'
 	for (var i = 0; i < integer; i++){
-		console.log('test')
+		string = ''
+		for (var z = 0; z <= Math.floor(Math.random()*10)+1 ; z++ ) {
+			string += (letters[Math.floor(Math.random()*26)])
+		}
+		array.push(string)
 	}
-	
 	return array
 }
 
 buildArray(5)
+console.log(buildArray(4)) // -> [ 'tehsbg', 'wg', 'gfezy', 'iros' ]
+console.log(buildArray(8)) // -> [ 'it', 'cuj', 'krj', 'olbdea', 'saswpxq', 'dn', 'vzf', 'pyjgqkp' ]
+console.log(buildArray(3)) // -> [ 'ohcbr', 'dmopp', 'ytpv' ]

@@ -15,17 +15,35 @@ function longestItem(array) {
 // console.log(longestItem(['bananas', 'wine', 'abcdefghijklmnop', '22', 22]))
 
 
-function keyValuePair(object1, object2) {
-	for (object1)
-		console.log(object1.name)
+my_object = {
+	name: 'michael',
+	age: 21,
+	isAPerson: true,
+};
+
+second_object = {
+	name: 'frank',
+	age: 18,
+	isAPerson: true,
 }
 
-hash1 = {
-	name: 'Michael', age: 25, isHuman: true
+
+
+for (var key in my_object) {
+	console.log(key + " = " + my_object[key])
 }
 
-hash2 = {
-	name: 'Amanda', age: 30, isHuman: true
+console.log('')
+
+for (var key in second_object) {
+	console.log(key + " = " + second_object[key])
 }
 
-keyValuePair(hash1, hash2)
+console.log('')
+
+for (var key in my_object) {
+	for (var second_key in second_object) {
+		if ( key, my_object[key] == second_key, second_object[key] ){ true }
+		else {false}
+	}
+}

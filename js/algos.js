@@ -73,3 +73,12 @@ buildArray(5)
 console.log(buildArray(4)) // -> [ 'tehsbg', 'wg', 'gfezy', 'iros' ]
 console.log(buildArray(8)) // -> [ 'it', 'cuj', 'krj', 'olbdea', 'saswpxq', 'dn', 'vzf', 'pyjgqkp' ]
 console.log(buildArray(3)) // -> [ 'ohcbr', 'dmopp', 'ytpv' ]
+
+// Part 2:
+
+for (var i = 0; i < 10; i++) {
+	var x = buildArray(Math.floor(Math.random()*10)+1)
+	console.log(x)
+	console.log("Longest item in array = " + longestItem(x))
+	console.log('')
+}

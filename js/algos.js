@@ -52,3 +52,21 @@ fourth_object = {
 }
 
 console.log(matchingPair(third_object, fourth_object)); // -> false
+
+
+// Release 2:
+
+Math.round(((Math.random(10))*10)+1)
+
+
+function buildArray(integer) {
+	array = []
+	
+	for (var i = 0; i < integer; i++){
+		console.log('test')
+	}
+	
+	return array
+}
+
+buildArray(5)

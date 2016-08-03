@@ -38,3 +38,18 @@ anotherCar.starts();
 
 // If you wanted to loop through the keys and values of an object, how would you do that? (There are a few ways to accomplish this, and some gotchas that can happen depending on your approach.)
 // Are there advantages to using constructor functions to create objects? Disadvantages? 
+// 
+// 1. Looping through the keys and values of an object can be done with the following code:
+// for (var key in object_name) {
+// 	console.log(key + " = " + object_name[key])
+// }
+// In this code, the variable 'key' is being created to represent the object's keys. No variable is needed for the values, as the values can be retrieved with just using the keys.
+
+// 2. Constructor functions are good for creating multiple copies of objects with the same properties(keys).
+// One disadvantage would be that if you forget to put 'new' before each new instance of the object,
+// javascript edits the object type itself, instead of creating a new object with your desired arguments.
+
+
+
+
+

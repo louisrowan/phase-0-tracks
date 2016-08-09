@@ -1,0 +1,53 @@
+Release 2: Execute SQL Queries
+
+1. Display the information in one table (either table is fine):
+
+sqlite> select * from cities;
+1|Boston|true|645966|1
+2|Newton|false|87971|1
+3|Austin|true|885400|2
+4|Dallas|false|1258000|2
+5|Cambridge|false|107289|1
+6|El Paso|false|674433|2
+7|Honolulu|true|337256|3
+
+--
+2. Update an item that meets some condition: (Adding 100,000 to Honolulu population)
+sqlite> update cities set population=437256 where name="Honolulu";
+
+--
+3. Display the information in both tables using one query.
+
+sqlite> select * from cities, states where cities.state_id = states.id;
+1|Boston|true|645966|1|1|Massachusetts|6794422|15
+2|Newton|false|87971|1|1|Massachusetts|6794422|15
+3|Austin|true|885400|2|2|Texas|27469114|2
+4|Dallas|false|1258000|2|2|Texas|27469114|2
+5|Cambridge|false|107289|1|1|Massachusetts|6794422|15
+6|El Paso|false|674433|2|2|Texas|27469114|2
+7|Honolulu|true|437256|3|3|Hawaii|1431603|43
+
+--
+4. Display a narrower selection of columns (Only showing city name, city population, state name, state population rank)
+
+sqlite> select cities.name, cities.population, states.name, states.population_rank from cities join states on cities.state_id = states.id;
+Boston|645966|Massachusetts|15
+Newton|87971|Massachusetts|15
+Austin|885400|Texas|2
+Dallas|1258000|Texas|2
+Cambridge|107289|Massachusetts|15
+El Paso|674433|Texas|2
+Honolulu|437256|Hawaii|43
+
+Delete an item that meets some condition (Deleting cities with population under 100,000)
+
+sqlite> delete from cities where population<100000;
+
+-- Printing out cities again shows that Newton was deleted since its pop was < 100,000:
+sqlite> select * from cities;
+1|Boston|true|645966|1
+3|Austin|true|885400|2
+4|Dallas|false|1258000|2
+5|Cambridge|false|107289|1
+6|El Paso|false|674433|2
+7|Honolulu|true|437256|3

@@ -13,6 +13,7 @@ sqlite> select * from cities;
 
 --
 2. Update an item that meets some condition: (Adding 100,000 to Honolulu population)
+
 sqlite> update cities set population=437256 where name="Honolulu";
 
 --
@@ -51,3 +52,50 @@ sqlite> select * from cities;
 5|Cambridge|false|107289|1
 6|El Paso|false|674433|2
 7|Honolulu|true|437256|3
+
+
+
+
+--
+Release 3:
+--
+
+4 types of joins in SQL:
+1. Inner join: Prints all rows that have at least one match from both tables
+2. Left join: Prints all rows from left table, but only rows on right side that have a match
+3. Right join: Prints all rows from right table, but only rows on left side that have a match
+4. Full Join: Prints all rows when there is match in either table
+** Right join and full join are not supported on sqlite
+
+
+
+
+2. Try a few different joins:
+
+*Added NYC to cities*
+
+sqlite> select cities.name, states.name from cities join states on cities.state_id = states.id;
+Boston|Massachusetts
+Austin|Texas
+Dallas|Texas
+Cambridge|Massachusetts
+El Paso|Texas
+Honolulu|Hawaii
+--  NYC does not show up on a regular join
+
+sqlite> select cities.name, states.name from cities left join states on cities.state_id = states.id;
+Boston|Massachusetts
+Austin|Texas
+Dallas|Texas
+Cambridge|Massachusetts
+El Paso|Texas
+Honolulu|Hawaii
+NYC|
+-- NYC DOES show up on a left join, since a left join prints out all values of left table regardless of if they match with the right table or not.
+
+* Left join for cities with population > 800,000
+sqlite> select cities.name, cities.population, states.name from cities left join states on cities.state_id = states.id where cities.population>800000;
+Austin|885400|Texas
+Dallas|1258000|Texas
+NYC|8000000|
+

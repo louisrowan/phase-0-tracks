@@ -20,4 +20,33 @@
 # 	b. chance of getting caught and staff being arrested
 
 
+class Game
 
+	def initialize
+		@cash = 100
+		@sellers = 0
+		@thiefs = 0
+		@police = 0
+		@cds = 5
+	end
+
+
+	def make_sale(item, amount)
+		if item == 'cds'
+			@cds -= amount
+			@cash += (amount)*5
+		end
+	end
+
+
+
+	def status
+		puts "#{@cash} cash"
+	end
+
+end
+
+active_game = Game.new
+active_game.status
+active_game.make_sale('cds', 2)
+active_game.status

@@ -51,8 +51,29 @@ class Game
 		pay_workers
 		daily_sales
 		daily_thievery
+		daily_consequences
 		status
 	end
+
+	def daily_consequences
+		@sellers.times do |person|
+			random = rand(50)
+			if random == 0
+				@sellers -= 1
+				puts "one of your sellers got arrested! You now have #{@sellers} left!"
+			end
+		end
+		@thiefs.times do |person|
+			random = rand(50)
+			if random == 0
+				@thiefs -= 1
+				puts "one of your thieves got arrested! You now have #{@thiefs} left!"
+			end
+		end
+	end
+
+
+
 
 	def pay_workers
 		@cash -= (@sellers + @thiefs)*10

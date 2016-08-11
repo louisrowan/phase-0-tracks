@@ -23,11 +23,12 @@
 
 
 class Game
+	attr_reader :cash, :day
 
 	def initialize
 		@cash = 100
 		@sellers = 1
-		@thiefs = 1
+		@thieves = 1
 		@police = 0
 		@cds = 5
 		@day = 1
@@ -39,20 +40,36 @@ class Game
 		daily_profit = daily_sellers*20
 		@cds -= daily_sellers
 		@cash += daily_profit
+		if @cds <= 0
+			return 'ran out of products'
+		end
 	end
 
 	def daily_thievery
-		@cds += (@thiefs)*3
+		@cds += (@thieves)*3
 	end
 
 
 	def advance_day
 		@day += 1
 		pay_workers
-		daily_sales
+		if daily_sales == 'ran out of products'
+			puts "You ran out of things to sell so your workers quit. Game over"
+			return 'game over'
+		end
 		daily_thievery
 		daily_consequences
+		if game_active? == false
+			return 'game over'
+		end
 		status
+	end
+
+	def game_active?
+		if @cash < 0
+			puts "You ran out of money! Game over."
+			return false
+		end
 	end
 
 	def daily_consequences
@@ -63,20 +80,25 @@ class Game
 				puts "one of your sellers got arrested! You now have #{@sellers} left!"
 			end
 		end
-		@thiefs.times do |person|
+		@thieves.times do |person|
 			random = rand(50)
 			if random == 0
-				@thiefs -= 1
-				puts "one of your thieves got arrested! You now have #{@thiefs} left!"
+				@thieves -= 1
+				puts "one of your thieves got arrested! You now have #{@thieves} left!"
 			end
 		end
 	end
 
+	def operations
+		puts "You currently employ #{@sellers} sellers, who make $#{@sellers*10}/day"
+		puts "You currently employ #{@thieves} thieves, who make $#{@thieves*10}/day"
+		puts "You have #{@cds} cds in stock."
+	end
 
 
 
 	def pay_workers
-		@cash -= (@sellers + @thiefs)*10
+		@cash -= (@sellers + @thieves)*10
 	end
 
 	def hire_seller
@@ -84,7 +106,7 @@ class Game
 	end
 
 	def hire_thief
-		@thiefs += 1
+		@thieves += 1
 	end
 
 
@@ -112,18 +134,64 @@ if ans == ''
 else
 	active_game = Game.new
 	while true
-		puts 'what do you want to do? a=advance, s=hire seller, t=hire thief, st=status'
+		puts 'what do you want to do? a=advance, s=hire seller, t=hire thief, .=status'
 		res = gets.chomp
 		if res == 'a'
-			active_game.advance_day
+			if active_game.advance_day == 'game over'
+				break
+			end
 		elsif res == 's'
 			active_game.hire_seller
 		elsif res == 't'
 			active_game.hire_thief
-		elsif res == 'st'
+		elsif res == '.'
 			active_game.status
+		elsif res == 'o'
+			active_game.operations
 		elsif res =='quit'
 			break
 		end
 	end
+end
+
+puts "Congratulations, you made it #{active_game.day} days and made #{active_game.cash} cash."
+
+
+
+
+
+# Database stuff
+require 'sqlite3'
+
+db = SQLite3::Database.new("results.db")
+
+create_table_cmd = <<-SQL
+  CREATE TABLE IF NOT EXISTS games(
+    id INTEGER PRIMARY KEY,
+    day INT,
+    cash INT
+  )
+SQL
+
+db.execute(create_table_cmd)
+
+def add_game(db, x, y)
+	db.execute("insert into games (day, cash) values (?, ?)", [x, y])
+end
+
+add_game(db, active_game.day, active_game.cash)
+
+
+
+results = db.execute("select * from games")
+results.each do |result|
+	puts "You made it #{result[1]} days and earned #{result[2]} cash."
+end
+
+
+#print out top 5
+puts "Top 5:"
+top5 = db.execute("select * from games order by cash desc limit 5")
+top5.each do |top|
+	puts "You made it #{top[1]} days and earned #{top[2]} cash."
 end

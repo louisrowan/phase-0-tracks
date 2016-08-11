@@ -73,15 +73,36 @@ class Game
 
 end
 
-active_game = Game.new
-active_game.advance_day
-active_game.advance_day
-active_game.advance_day
-active_game.hire_seller
-active_game.hire_thief
-active_game.hire_seller
-active_game.advance_day
-active_game.advance_day
-active_game.advance_day
-active_game.advance_day
-active_game.advance_day
+puts 'hit return for automatic interface'
+ans = gets.chomp
+if ans == ''
+	active_game = Game.new
+	active_game.advance_day
+	active_game.advance_day
+	active_game.advance_day
+	active_game.hire_seller
+	active_game.hire_thief
+	active_game.hire_seller
+	active_game.advance_day
+	active_game.advance_day
+	active_game.advance_day
+	active_game.advance_day
+	active_game.advance_day
+else
+	active_game = Game.new
+	while true
+		puts 'what do you want to do? a=advance, s=hire seller, t=hire thief, st=status'
+		res = gets.chomp
+		if res == 'a'
+			active_game.advance_day
+		elsif res == 's'
+			active_game.hire_seller
+		elsif res == 't'
+			active_game.hire_thief
+		elsif res == 'st'
+			active_game.status
+		elsif res =='quit'
+			break
+		end
+	end
+end

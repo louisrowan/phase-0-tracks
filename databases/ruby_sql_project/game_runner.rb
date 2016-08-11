@@ -23,6 +23,8 @@ else
 		if res == 'a'
 			if active_game.advance_day == 'game over'
 				break
+			elsif active_game.advance_day == 'reached level 2'
+				puts 'reached level 2!'
 			end
 		elsif res == 's'
 			active_game.hire_seller
@@ -41,12 +43,25 @@ end
 puts "Congratulations, you made it #{active_game.day} days and made #{active_game.cash} cash."
 
 
-time = Time.new
-time = time.to_s
-time = time.split(' ')
-time = time[0]
-time = time.to_s
-puts time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# time
+time = Time.new.to_s.split(' ')[0].to_s
 
 
 # Database stuff
@@ -54,7 +69,7 @@ require 'sqlite3'
 
 db = SQLite3::Database.new("results.db")
 
-db.execute("drop table games")
+# db.execute("drop table games")
 
 create_table_cmd = <<-SQL
   CREATE TABLE IF NOT EXISTS games(
@@ -74,16 +89,16 @@ end
 add_game(db, time, active_game.day, active_game.cash)
 
 
+# print all results
+# results = db.execute("select * from games")
+# results.each do |result|
+# 	puts "#{result[1]}: You made it #{result[2]} days and earned #{result[3]} cash."
+# end
 
-results = db.execute("select * from games")
-results.each do |result|
-	puts "#{result[1]}: You made it #{result[2]} days and earned #{result[3]} cash."
-end
 
-
-#print out top 5
-puts "Top 5:"
-top5 = db.execute("select * from games order by cash desc limit 5")
-top5.each do |top|
-	puts "#{top[1]}: You made it #{top[2]} days and earned #{top[3]} cash."
-end
+# print out top 5
+# puts "Top 5:"
+# top5 = db.execute("select * from games order by cash desc limit 5")
+# top5.each do |top|
+# 	puts "#{top[1]}: You made it #{top[2]} days and earned #{top[3]} cash."
+# end

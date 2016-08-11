@@ -32,6 +32,7 @@ class Game
 		@police = 0
 		@cds = 5
 		@day = 1
+		@level = 1
 	end
 
 
@@ -42,6 +43,14 @@ class Game
 		@cash += daily_profit
 		if @cds <= 0
 			return 'ran out of products'
+		end
+		if @cash > 300
+			if @level == 1
+				@level = 2
+				puts "Congratulations! You have reached level 2"
+				puts "You can now sell stolen televisions for even more profit!"
+				return 'reached level 2'
+			end
 		end
 	end
 
@@ -56,6 +65,8 @@ class Game
 		if daily_sales == 'ran out of products'
 			puts "You ran out of things to sell so your workers quit. Game over"
 			return 'game over'
+		elsif daily_sales == 'reached level 2'
+			return 'reached level 2'
 		end
 		daily_thievery
 		daily_consequences

@@ -23,14 +23,14 @@
 
 
 class Game
-	attr_reader :cash, :day
+	attr_reader :cash, :day, :level, :sellers, :thieves, :inventory
 
 	def initialize
 		@cash = 100
 		@sellers = 1
 		@thieves = 1
 		@police = 0
-		@cds = 5
+		@inventory = 5
 		@day = 1
 		@level = 1
 	end
@@ -38,24 +38,35 @@ class Game
 
 	def daily_sales
 		daily_sellers = @sellers
-		daily_profit = daily_sellers*20
-		@cds -= daily_sellers
+		daily_profit = daily_sellers*@level*20
+		@inventory -= daily_sellers
 		@cash += daily_profit
-		if @cds <= 0
+		if @inventory <= 0
 			return 'ran out of products'
 		end
 		if @cash > 300
 			if @level == 1
 				@level = 2
+				5.times { puts "-"*50 }
 				puts "Congratulations! You have reached level 2"
-				puts "You can now sell stolen televisions for even more profit!"
-				return 'reached level 2'
+				puts "You can now sell stolen televisions for double the profit!"
+				5.times { puts "-"*50 }
 			end
 		end
+		if @cash > 1000
+			if @level == 2
+				@level = 3
+				5.times { puts "-"*50 }
+				puts "Congratulations! You have reached level 3"
+				puts "You can now sell stolen computers for even more profit!"
+				5.times { puts "-"*50 }
+			end
+		end
+
 	end
 
 	def daily_thievery
-		@cds += (@thieves)*3
+		@inventory += (@thieves)*3
 	end
 
 
@@ -73,7 +84,12 @@ class Game
 		if game_active? == false
 			return 'game over'
 		end
-		status
+		if rand(100) == 0
+			puts "You got caught by cops"
+			puts "game over"
+			return 'game over'
+		end
+		operations
 	end
 
 	def game_active?
@@ -101,9 +117,14 @@ class Game
 	end
 
 	def operations
-		puts "You currently employ #{@sellers} sellers, who make $#{@sellers*10}/day"
-		puts "You currently employ #{@thieves} thieves, who make $#{@thieves*10}/day"
-		puts "You have #{@cds} cds in stock."
+		puts
+		puts "*"*50
+		puts "This is day #{day}, you have $#{@cash} and are in level #{level}."
+		puts "You currently employ #{@sellers} sellers, who total $#{@sellers*10}/day"
+		puts "You currently employ #{@thieves} thieves, who total $#{@thieves*10}/day"
+		puts "You have #{@inventory} inventory in stock."
+		puts "*"*50
+		puts
 	end
 
 
@@ -121,8 +142,5 @@ class Game
 	end
 
 
-	def status
-		puts "Day #{@day}: #{@cash} cash, #{@cds} cds, #{@sellers} sellers."
-	end
 
 end

@@ -96,11 +96,29 @@ username = gets.chomp
 
 add_game(db, username, time, active_game.day, active_game.cash)
 
-# print all results
-results = db.execute("select * from games")
+puts "Your final score:"
+results = db.execute("select * from games order by id desc limit 1")
 results.each do |result|
-	puts "Username: #{result[1]}; Date: #{result[2]}; Days reached: #{result[3]}; Total cash: $#{result[4]}"
+	print "Username: #{result[1]}".ljust(20)
+	print "Date: #{result[2]}".ljust(20)
+	print "Days reached: #{result[3]}".ljust(20)
+	print "Total cash: $#{result[4]}".ljust(20)
+	puts
 end
 
-puts "Do you want "
-db_answer = gets.chomp
+
+
+puts
+puts "Top 5 scores of all time:"
+
+results = db.execute("select * from games order by cash desc limit 5")
+results.each do |result|
+	print "Username: #{result[1]}".ljust(20)
+	print "Date: #{result[2]}".ljust(20)
+	print "Days reached: #{result[3]}".ljust(20)
+	print "Total cash: $#{result[4]}".ljust(20)
+	puts
+end
+
+
+

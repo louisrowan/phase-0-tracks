@@ -38,10 +38,16 @@ class Game
 
 	def hire_seller
 		@sellers += 1
+		puts "*"*50
+		puts "You just hired a new seller, you now have #{@sellers} sellers working for you."
+		puts "*"*50
 	end
 
 	def hire_thief
 		@thieves += 1
+		puts "*"*50
+		puts "You just hired a new thief, you now have #{@thieves} thieves working for you."
+		puts "*"*50
 	end
 
 
@@ -88,11 +94,11 @@ class Game
 
 		puts
 		puts "*"*50
-		puts "This is day #{day}, and have $#{@cash}."
+		puts "This is day #{day}, and you have $#{@cash}."
 		puts "You are in level #{@level} and are selling #{@product}."
 		puts "You currently employ #{@sellers} sellers, who total $#{@sellers*10}/day"
 		puts "You currently employ #{@thieves} thieves, who total $#{@thieves*10}/day"
-		puts "You have #{@inventory} inventory in stock."
+		puts "You have #{@inventory} #{@product} in stock."
 		puts "*"*50
 		puts
 	end
@@ -116,7 +122,7 @@ class Game
 				@level = 2
 				5.times { puts "-"*50 }
 				puts "Congratulations! You have reached level 2"
-				puts "You can now sell stolen televisions for double the profit!"
+				puts "You can now sell stolen Movies for double the profit!"
 				5.times { puts "-"*50 }
 				puts "Hit return to continue"
 				gets.chomp
@@ -127,7 +133,7 @@ class Game
 				@level = 3
 				5.times { puts "-"*50 }
 				puts "Congratulations! You have reached level 3"
-				puts "You can now sell stolen computers for even more profit!"
+				puts "You can now sell stolen Stereos for even more profit!"
 				5.times { puts "-"*50 }
 				puts "Hit return to continue"
 				gets.chomp
@@ -138,7 +144,18 @@ class Game
 				@level = 4
 				5.times { puts "-"*50 }
 				puts "Congratulations! You have reached level 4"
-				puts "You can now sell stolen laptops for even more profit!"
+				puts "You can now sell stolen TVs for even more profit!"
+				5.times { puts "-"*50 }
+				puts "Hit return to continue"
+				gets.chomp
+			end
+		end
+		if @cash > 10000
+			if @level == 4
+				@level = 5
+				5.times { puts "-"*50 }
+				puts "Congratulations! You have reached level 5"
+				puts "You can now sell stolen Computers for even more profit!"
 				5.times { puts "-"*50 }
 				puts "Hit return to continue"
 				gets.chomp

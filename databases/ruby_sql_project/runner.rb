@@ -96,6 +96,40 @@ username = gets.chomp
 
 add_game(db, username, time, active_game.day, active_game.cash)
 
+
+# Find player #
+number = nil
+cash = nil
+place = nil
+results = db.execute("select * from games order by id desc limit 1")
+results.each do |result|
+	number = result[0]
+	cash = result[4]
+end
+
+# Find total number of players
+index = 0
+results = db.execute("select * from games order by cash desc")
+results.each do |result|
+	index += 1
+	if result[4] == cash
+		break
+	end
+end
+
+if index == 1
+	puts "*"*50
+	puts "NEW HIGH SCORE! $#{cash}!"
+	puts "*"*50
+end
+
+puts
+puts "You finished ##{index}/#{number} total plays."
+
+
+
+
+puts
 puts "Your final score:"
 results = db.execute("select * from games order by id desc limit 1")
 results.each do |result|

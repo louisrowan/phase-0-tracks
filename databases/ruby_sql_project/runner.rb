@@ -55,7 +55,6 @@ while true
 		puts "Please enter a valid response"
 	end
 
-
 	if active_game.active == false
 		break
 	end

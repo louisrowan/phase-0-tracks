@@ -1,10 +1,19 @@
-sqlite> select users.first_name, reviews.comment, businesses.name from users, reviews, businesses where users.id = reviews.users_id and businesses.id = reviews.businesses_id;
-Bradford|tastes great|Grundy Hollow Wedding Chapel
-Mandy|terrible|Grundy Hollow Wedding Chapel
-Mandy|best food|Amir's Towing
-Angela|worst food|The Beagle Nightclub
+
+2. sqlite> select * from users, reviews, businesses where users.id = reviews.users_id and businesses.id = reviews.businesses_id;
+1|Bradford|Pitt||5|tastes great|1|1|1|Grundy Hollow Wedding Chapel
+2|Mandy|Kaling||2|terrible|1|2|1|Grundy Hollow Wedding Chapel
+2|Mandy|Kaling||5|best food|2|2|2|Amir's Towing
+3|Angela|Jolie||1|worst food|3|3|3|The Beagle Nightclub
 
 
-sqlite> select * from users, reviews, businesses where users.id = reviews.users_id and businesses.id = reviews.businesses_id and businesses.id = 1;
+
+3. sqlite> select users.first_name, users.last_name, businesses.name, reviews.stars, reviews.comment from users, reviews, businesses where users.id = reviews.users_id and businesses.id = reviews.businesses_id;
+Bradford|Pitt|Grundy Hollow Wedding Chapel|5|tastes great
+Mandy|Kaling|Grundy Hollow Wedding Chapel|2|terrible
+Mandy|Kaling|Amir's Towing|5|best food
+Angela|Jolie|The Beagle Nightclub|1|worst food
+
+
+4. sqlite> select * from users, reviews, businesses where users.id = reviews.users_id and businesses.id = reviews.businesses_id and businesses.id = 1;
 1|Bradford|Pitt||5|tastes great|1|1|1|Grundy Hollow Wedding Chapel
 2|Mandy|Kaling||2|terrible|1|2|1|Grundy Hollow Wedding Chapel

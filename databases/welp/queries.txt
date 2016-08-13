@@ -1,0 +1,10 @@
+sqlite> select users.first_name, reviews.comment, businesses.name from users, reviews, businesses where users.id = reviews.users_id and businesses.id = reviews.businesses_id;
+Bradford|tastes great|Grundy Hollow Wedding Chapel
+Mandy|terrible|Grundy Hollow Wedding Chapel
+Mandy|best food|Amir's Towing
+Angela|worst food|The Beagle Nightclub
+
+
+sqlite> select * from users, reviews, businesses where users.id = reviews.users_id and businesses.id = reviews.businesses_id and businesses.id = 1;
+1|Bradford|Pitt||5|tastes great|1|1|1|Grundy Hollow Wedding Chapel
+2|Mandy|Kaling||2|terrible|1|2|1|Grundy Hollow Wedding Chapel

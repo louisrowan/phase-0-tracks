@@ -1,29 +1,24 @@
-# Game ideas:
-# Purpose: Run a street operation selling illicit goods
+# Game: Run a street operation selling illicit goods
 # types of goods:
 # 1. bootleg CDs
 # 2. bootleg movies
-# 3. Knockoff clothing
+# 3. Stolen stereos
 # 4. Stolen TVs
 # 5. Stolen computers
 
 # types of actions that can be taken:
-# 1. Hiring
+# Hiring
 # people to hire:
 # a. Salespeople - sell goods
 # b. Thiefs - obtain goods
-# c. Crooked cop - helps keep from getting caught
-
-# 2. Increase territory in the city
-# when trying to increase territory:
-# 	a. chance of gaining territory which leads to more Sales
-# # 	b. chance of getting caught and staff being arrested
-
-# 3. advance one day
+# Advance one day
+# Pay workers
+# Get caught by police
+# Level up after making enough money
 
 
 class Game
-	attr_reader :cash, :day, :level, :sellers, :thieves, :inventory, :active
+	attr_reader :cash, :day, :level, :sellers, :thieves, :inventory, :active, :cash_previous
 
 	def initialize
 		@cash = 100
@@ -32,10 +27,13 @@ class Game
 		@inventory = 5
 		@day = 1
 		@level = 1
+		@level_multiplier = 1
 		@active = true
+		@cash_previous = 100
 		@product = "CD's"
 	end
 
+	# Adds 1 to sellers
 	def hire_seller
 		@sellers += 1
 		puts "*"*50
@@ -43,6 +41,7 @@ class Game
 		puts "*"*50
 	end
 
+	# Adds 1 to thieves
 	def hire_thief
 		@thieves += 1
 		puts "*"*50
@@ -51,8 +50,14 @@ class Game
 	end
 
 
+	# Adds 1 to day
+	# Saves previous day's cash total
+	# Calls pay_workers, daily_salves, daily_thievery, daily_consequences methods
+	# Ends game if cash or inventory gets below 0, if a random number 0-99 = 0
+	# calls operations method which prints to screen
 	def advance_day
 		@day += 1
+		@cash_previous = @cash
 		pay_workers
 		daily_sales
 		daily_thievery
@@ -77,6 +82,7 @@ class Game
 	end
 
 
+	# Neatly prints relevant instance variables to screen 
 	def operations
 
 		if @level == 1
@@ -94,7 +100,8 @@ class Game
 
 		puts
 		puts "*"*50
-		puts "This is day #{day}, and you have $#{@cash}."
+		puts "This is day #{@day}, and you have $#{@cash}."
+		puts "Yesterday you made $#{@cash - @cash_previous}."
 		puts "You are in level #{@level} and are selling #{@product}."
 		puts "You currently employ #{@sellers} sellers, who total $#{@sellers*10}/day"
 		puts "You currently employ #{@thieves} thieves, who total $#{@thieves*10}/day"
@@ -107,19 +114,24 @@ class Game
 	# Private methods called by advance_day method
 	private	
 
+	# Pays each worker $10 every day
 	def pay_workers
 		@cash -= (@sellers + @thieves)*10
 	end
 
 
+
+	# Calculates profit based on number of sellers and current level
+	# Each seller sells 1 item from inventory per day
+	# New levels and level multiplers reached when cash gets to certain levels
 	def daily_sales
-		daily_sellers = @sellers
-		daily_profit = daily_sellers*@level*20
-		@inventory -= daily_sellers
+		daily_profit = @sellers*@level_multiplier*20
+		@inventory -= @sellers
 		@cash += daily_profit
 		if @cash > 300
 			if @level == 1
 				@level = 2
+				@level_multiplier = 2
 				5.times { puts "-"*50 }
 				puts "Congratulations! You have reached level 2"
 				puts "You can now sell stolen Movies for double the profit!"
@@ -131,6 +143,7 @@ class Game
 		if @cash > 1000
 			if @level == 2
 				@level = 3
+				@level_multiplier = 4
 				5.times { puts "-"*50 }
 				puts "Congratulations! You have reached level 3"
 				puts "You can now sell stolen Stereos for even more profit!"
@@ -139,9 +152,10 @@ class Game
 				gets.chomp
 			end
 		end
-		if @cash > 5000
+		if @cash > 10000
 			if @level == 3
 				@level = 4
+				@level_multiplier = 7
 				5.times { puts "-"*50 }
 				puts "Congratulations! You have reached level 4"
 				puts "You can now sell stolen TVs for even more profit!"
@@ -150,12 +164,13 @@ class Game
 				gets.chomp
 			end
 		end
-		if @cash > 10000
+		if @cash > 30000
 			if @level == 4
 				@level = 5
+				@level_multiplier = 10
 				5.times { puts "-"*50 }
 				puts "Congratulations! You have reached level 5"
-				puts "You can now sell stolen Computers for even more profit!"
+				puts "You can now sell stolen Computers for max profit!"
 				5.times { puts "-"*50 }
 				puts "Hit return to continue"
 				gets.chomp
@@ -165,10 +180,12 @@ class Game
 
 	end
 
+	# Each thief steals 3 items per day
 	def daily_thievery
 		@inventory += (@thieves)*3
 	end
 
+	# 1 in 50 chance that each worker gets arrested
 	def daily_consequences
 		@sellers.times do |person|
 			random = rand(50)
@@ -189,10 +206,5 @@ class Game
 			end
 		end
 	end
-
-	
-
-
-
 
 end

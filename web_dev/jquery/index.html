@@ -5,10 +5,43 @@
 	<title>JQuery Project</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="jquery.js"></script>
+	<style>
+	* {
+		text-align: center;
+	}
+	img {
+		display: inline;
+		opacity: 0;
+	}
+	</style>
 </head>
 <body>
+<div id="container">
+<h1 id="title">Experimenting with JQuery</h1>
 
-<p>test</p>
 
+<br><hr><br>
+<h2>Mouseover to view:</h2>
+<h3 class="animals" id="elephant">Elephant</h3>
+<h3 class="animals" id="gorilla">Gorilla</h3>
+<h3 class="animals" id="rhino">Rhino</h3>
+<img class="animalsclass" id="elephantimg" src="http://2.bp.blogspot.com/-m8DA9EUbqxY/TpwYST8F7rI/AAAAAAAABtA/4jXfOXClXHY/s1600/african-bush-elephant.jpg">
+<img class="animalsclass" id="gorillaimg" src="https://pbs.twimg.com/profile_images/736946869390200832/ocjV01gX.jpg">
+<img class="animalsclass" id="rhinoimg" src="http://www.conservenature.org/learn_about_wildlife/india/images/indian_rhino.JPG">
+
+<br>
+<button id="hide">Hide All</button>
+
+<br><hr><br>
+<h2>Select Background Color:</h2>
+<div id="buttondiv">
+	<button class="colors" id="red">Red</button>
+	<button class="colors" id="lightblue">Blue</button>
+	<button class="colors" id="green">Green</button>
+	<button class="colors" id="yellow">Yellow</button>
+	<button class="colors" id="white">White</button>
+</div>
+
+</div>
 </body>
 </html>

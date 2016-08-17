@@ -1,6 +1,8 @@
 # require gems
 require 'sinatra'
+require 'sinatra/reloader' if development?
 require 'sqlite3'
+require 'Faker'
 
 db = SQLite3::Database.new("students.db")
 db.results_as_hash = true
@@ -43,4 +45,17 @@ end
 get '/students/:id' do
   student = db.execute("SELECT * FROM students WHERE id=?", [params[:id]])[0]
   student.to_s
+end
+
+get '/contact' do
+  address = Faker::Address.street_address + ', ' + Faker::Address.city
+  "I live at #{address}."
+end
+
+get '/great_job' do
+  if name
+    "Good job, #{params[:name]}"
+  else
+    "Good job!"
+  end
 end

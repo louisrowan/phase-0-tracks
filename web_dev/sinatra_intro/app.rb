@@ -47,15 +47,29 @@ get '/students/:id' do
   student.to_s
 end
 
+# Contact Route
 get '/contact' do
   address = Faker::Address.street_address + ', ' + Faker::Address.city
   "I live at #{address}."
 end
 
-get '/great_job' do
-  if name
+# Great job routes
+get '/great_job/:name' do
     "Good job, #{params[:name]}"
-  else
-    "Good job!"
-  end
+end
+
+get '/great_job' do
+  "Good job!"
+end
+
+# Add together
+get '/add/:num1/:num2' do
+  sum = params[:num1].to_i + params[:num2].to_i
+  "#{params[:num1]} + #{params[:num2]} = #{sum.to_s}"
+end
+
+# Only shows those in specified location
+get '/location/:location' do
+  students = db.execute("select * from students where campus='#{params[:location].upcase}'")
+  students.to_s
 end
